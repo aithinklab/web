@@ -868,4 +868,90 @@
                 </div>
                 <div class="fund-item">
                     <span class="fund-percentage">35%</span>
-                    <strong>Markedsføring
+
+                    <strong><strong>Markedsføring & Salg (Go-to-Market)</strong><br>
+                    Skalering av Sentrum Intelligence salgsflyt (Lead Generation Engine) og innleie av nøkkelpersonell.
+                </div>
+                <div class="fund-item">
+                    <span class="fund-percentage">10%</span>
+                    <strong>Kjerne-IP Forsterkning (StratOps & CGA)</strong><br>
+                    Investering i bedre GPU-ressurser og sikkerhetsoppgraderinger for å opprettholde teknologisk forsprang.
+                </div>
+                <div class="fund-item">
+                    <span class="fund-percentage">10%</span>
+                    <strong>Operasjonell Buffer & Adm.</strong><br>
+                    Kapital for uforutsette utgifter, juridisk/regnskapsmessig compliance og generell drift.
+                </div>
+            </div>
+
+            <div style="margin-top: 4rem;">
+                <a href="#" class="btn btn-primary" style="font-size: 1.5rem; padding: 1.5rem 3rem;">Lås Din Andel (Minimum: 100.000 NOK)</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <a href="#" class="logo-container" style="justify-content: center; margin-bottom: 1.5rem;">
+                <img src="logo.png" alt="AI ThinkLab" class="logo-img">
+                <span class="logo-text">AI ThinkLab AS</span>
+            </a>
+            <p>Org.nr. 921 000 000 | Alle rettigheter reservert. Copyright © 2025</p>
+            <p style="font-size: 0.8rem; color: #444;">Merk: Investeringer i tidligfase selskaper innebærer høy risiko. Les investeringsmemorandumet nøye.</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for Countdown Timer
+        function updateCountdown() {
+            // Hardcoded countdown end time (f.eks. 48 timer fra nå, men forblir statisk i koden)
+            // For demonstrasjon, bruker vi en statisk verdi som allerede er i HTML-en.
+            const countdownElement = document.getElementById('countdown');
+            if (countdownElement) {
+                // I et ekte scenario ville du beregnet differansen mellom nå og sluttid.
+                // Vi lar den stå statisk slik du har den: 'LIMITED PRE-SEED: 47:59:32'
+            }
+        }
+        // setInterval(updateCountdown, 1000); // Uncomment for live countdown
+        
+        // JavaScript for Scrollable Product Content
+        document.addEventListener('DOMContentLoaded', () => {
+            const scrollableContents = document.querySelectorAll('.scrollable-content');
+            scrollableContents.forEach(content => {
+                // Zoom on hover/scroll for demonstration
+                content.addEventListener('mouseover', () => {
+                    content.classList.add('zoom-scroll');
+                });
+                content.addEventListener('mouseout', () => {
+                    content.classList.remove('zoom-scroll');
+                });
+            
+                // Remove scroll indicator on user scroll
+                const indicator = content.nextElementSibling;
+                if (indicator && indicator.classList.contains('scroll-indicator')) {
+                    content.addEventListener('scroll', () => {
+                        indicator.style.display = 'none';
+                    }, { once: true });
+                }
+            });
+            
+            // JavaScript for Static Zoomable Product Content (Sentrum Intelligence)
+            const sentrumZoom = document.getElementById('sentrumZoom');
+            if (sentrumZoom) {
+                sentrumZoom.addEventListener('mousemove', (e) => {
+                    const rect = sentrumZoom.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    // Calculate percentage for transform-origin
+                    const xPercent = (x / rect.width) * 100;
+                    const yPercent = (y / rect.height) * 100;
+                    
+                    sentrumZoom.style.setProperty('--mouse-x', `${xPercent}%`);
+                    sentrumZoom.style.setProperty('--mouse-y', `${yPercent}%`);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
