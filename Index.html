@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI ThinkLab AS - Invester i Fremtidens AI-Systemer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --orange: #FF6600;
+            --black: #000000;
+            --dark-grey: #0A0A0A;
+            --darker-grey: #1a1a1a;
+            --blue: #00AFFF;
+            --white: #FFFFFF;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 102, 0, 0.2);
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--white);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--orange);
+        }
+
+        .cta-nav {
+            background: var(--orange);
+            color: var(--black);
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 700;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 102, 0, 0.3);
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 102, 0, 0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .countdown {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--orange), #ff8533);
+            color: var(--black);
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 102, 0, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(255, 102, 0, 0.8); }
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--white), var(--orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            color: #ccc;
+            margin-bottom: 3rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1.2rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--orange);
+            color: var(--black);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 102, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--orange);
+        }
+
+        .btn-secondary:hover {
+            background: var(--orange);
+            color: var(--black);
+        }
+
+        .validation {
+            padding: 6rem 2rem;
+            background: var(--dark-grey);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            text-align: center;
+            margin-bottom: 1rem;
+            font-weight: 900;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #999;
+            font-size: 1.2rem;
+            margin-bottom: 4rem;
+        }
+
+        .logos {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-bottom: 4rem;
+            opacity: 0.6;
+            filter: grayscale(1);
+        }
+
+        .validation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--darker-grey);
+            border-left: 4px solid var(--orange);
+            padding: 2rem;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255, 102, 0, 0.2);
+        }
+
+        .card h3 {
+            color: var(--orange);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            color: #ccc;
+            line-height: 1.8;
+        }
+
+        .products {
+            padding: 6rem 2rem;
+            background: var(--black);
+        }
+
+        .products-showcase {
+            display: grid;
+            gap: 6rem;
+            margin-top: 4rem;
+        }
+
+        .product-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .product-showcase:nth-child(even) {
+            direction: rtl;
+        }
+
+        .product-showcase:nth-child(even) > * {
+            direction: ltr;
+        }
+
+        .product-info {
+            padding: 2rem;
+        }
+
+        .product-number {
+            color: var(--orange);
+            font-size: 5rem;
+            font-weight: 900;
+            opacity: 0.3;
+            line-height: 1;
+        }
+
+        .product-info h3 {
+            color: var(--orange);
+            font-size: 2.5rem;
+            margin: 1rem 0;
+        }
+
+        .product-desc {
+            color: #ccc;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .feature-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+        }
+
+        .feature-list li::before {
+            content: '→';
+            color: var(--orange);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .product-visual {
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .device-frame {
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 102, 0, 0.3);
+            max-height: 600px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .device-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--orange), var(--blue));
+        }
+
+        .scrollable-content {
+            max-height: 560px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scrollbar-width: thin;
+            scrollbar-color: var(--orange) var(--darker-grey);
+        }
+
+        .scrollable-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .scrollable-content::-webkit-scrollbar-track {
+            background: var(--darker-grey);
+        }
+
+        .scrollable-content::-webkit-scrollbar-thumb {
+            background: var(--orange);
+            border-radius: 4px;
+        }
+
+        .scrollable-content img {
+            width: 100%;
+            display: block;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .scrollable-content.zoom-scroll img {
+            transform: scale(1.4);
+            transform-origin: center top;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--orange);
+            font-size: 0.9rem;
+            font-weight: 600;
+            animation: bounce 2s infinite;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        .zoomable-static {
+            cursor: zoom-in;
+            position: relative;
+        }
+
+        .zoomable-static img {
+            width: 100%;
+            display: block;
+            border-radius: 8px;
+            transition: transform 8s ease-in-out;
+        }
+
+        .zoomable-static:hover img {
+            transform: scale(2.2);
+            transform-origin: var(--mouse-x, 50%) var(--mouse-y, 50%);
+        }
+
+        .traction {
+            padding: 6rem 2rem;
+            background: var(--dark-grey);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin: 4rem 0;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--orange);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #999;
+            font-size: 1.1rem;
+        }
+
+        .founders {
+            padding: 6rem 2rem;
+            background: var(--black);
+        }
+
+        .founders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .founder-card {
+            background: var(--darker-grey);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .founder-card:hover {
+            transform: scale(1.02);
+        }
+
+        .founder-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--orange);
+        }
+
+        .founder-content {
+            padding: 2rem;
+        }
+
+        .founder-name {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+        }
+
+        .founder-title {
+            color: var(--orange);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .founder-bio {
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .founder-credentials {
+            list-style: none;
+            padding: 1rem;
+            background: rgba(255, 102, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .founder-credentials li {
+            padding: 0.5rem 0;
+            color: #aaa;
+        }
+
+        .founder-credentials li::before {
+            content: '✓';
+            color: var(--orange);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .investment {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--dark-grey), var(--black));
+            text-align: center;
+        }
+
+        .valuation-box {
+            background: var(--white);
+            color: var(--black);
+            padding: 3rem;
+            border-radius: 12px;
+            max-width: 700px;
+            margin: 3rem auto;
+            box-shadow: 0 30px 60px rgba(255, 102, 0, 0.3);
+        }
+
+        .valuation-label {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .valuation-amount {
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: var(--orange);
+            line-height: 1;
+        }
+
+        .use-of-funds {
+            max-width: 800px;
+            margin: 3rem auto;
+            text-align: left;
+        }
+
+        .use-of-funds h3 {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .fund-item {
+            background: var(--darker-grey);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--orange);
+        }
+
+        .fund-percentage {
+            color: var(--orange);
+            font-size: 2rem;
+            font-weight: 900;
+            margin-right: 1rem;
+        }
+
+        footer {
+            padding: 4rem 2rem;
+            background: var(--black);
+            border-top: 1px solid rgba(255, 102, 0, 0.2);
+            text-align: center;
+        }
+
+        footer p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 968px) {
+            .product-showcase {
+                grid-template-columns: 1fr;
+            }
+
+            .product-showcase:nth-child(even) {
+                direction: ltr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 6rem 1rem 3rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .founders-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-number {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <a href="#" class="logo-container">
+                <img src="logo.png" alt="AI ThinkLab" class="logo-img">
+                <span class="logo-text">AI ThinkLab</span>
+            </a>
+            <div class="nav-links">
+                <a href="#validation">Validering</a>
+                <a href="#products">Produkter</a>
+                <a href="#traction">Traksjon</a>
+                <a href="#founders">Team</a>
+                <a href="#investment" class="cta-nav">Invester Nå</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="countdown" id="countdown">LIMITED PRE-SEED: 47:59:32</div>
+            <h1>NORSK AI DOMINANS:<br>43 MNOK VERDI. 10 MNOK INNGANG.</h1>
+            <p class="hero-subtitle">
+                Vi bygger det autonome nervesystemet for nordiske eliteledere. Vårt validerte IP, 
+                drevet av tre autonome AI-motorer og nasjonal støtte, gjør vår Pre-Seed runde 
+                til et unmissable leverage point.
+            </p>
+            <div class="hero-cta">
+                <a href="#investment" class="btn btn-primary">Bli en Systemarkitekt</a>
+                <a href="#traction" class="btn btn-secondary">Se Finansiell Leverage</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="validation" class="validation">
+        <div class="container">
+            <h2>NASJONALT GODKJENT</h2>
+            <p class="section-subtitle">Bevist system, ikke bare idé</p>
+            
+            <div class="logos">
+                <img src="INNOVASJON_NORGE_LOGO_RED_BLACK_TRANSPARENT.png" alt="Innovasjon Norge" style="height: 60px; width: auto;">
+                <img src="NTNU_LOGO_BLUE_BLACK_TRANSPARENT.webp" alt="NTNU" style="height: 60px; width: auto;">
+                <img src="NOROFF_SCHOOL_OF_TECHNOLOGY_AND_DIGITAL_MEDIA_AI_THINKLAB.webp" alt="Noroff" style="height: 60px; width: auto;">
+            </div>
+
+            <div class="validation-grid">
+                <div class="card">
+                    <h3>Verifisert Grant: Innovasjon Norge</h3>
+                    <p>Statlig tildelt tilskudd bekrefter vår forretningsmodell og skalerbarhetspotensial. Dette er vårt nasjonale kvalitetsstempel. Saksnr: 2024/391580.</p>
+                </div>
+                <div class="card">
+                    <h3>Academic Moat: Eier Kompetanse-IP</h3>
+                    <p>Industripartner i NTNUs AIM-Health-senter og fagplansamarbeid med Noroff. Vi bygger et akademisk forsprang og eier den intellektuelle kapitalen.</p>
+                </div>
+                <div class="card">
+                    <h3>Thought Leadership: Først i Norge</h3>
+                    <p>Forfatter av Norges første praktiske guide om LLMs. Denne boken er et levende bevis på vår tidlige innsikt og systemkompetanse.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="products" class="products">
+        <div class="container">
+            <h2>VÅRT IP-ØKOSYSTEM</h2>
+            <p class="section-subtitle">Tre autonome vekstmotorer</p>
+
+            <div class="products-showcase">
+                <div class="product-showcase">
+                    <div class="product-info">
+                        <div class="product-number">01</div>
+                        <h3>SENTRUM INTELLIGENCE</h3>
+                        <p class="product-desc">Autonomisert B2B-vekst: Presis prospektanalyse og salgsautomatisering for umiddelbar ROI.</p>
+                        <ul class="feature-list">
+                            <li>Aggreger Brønnøysund-data i realtime</li>
+                            <li>Identifiser sårbarheter via etisk web-scraping</li>
+                            <li>Hyper-personlig konvertering: Opp til 5x høyere open rates</li>
+                            <li>70% reduksjon i CAC gjennom deep enrichment</li>
+                        </ul>
+                        <p style="color: var(--orange); font-weight: 700; margin-top: 1.5rem;">Mål: 500 betalende SaaS-brukere innen Q3 2026</p>
+                    </div>
+                    <div class="product-visual">
+                        <div class="device-frame">
+                            <div class="zoomable-static" id="sentrumZoom">
+                                <img src="FIRMA_INTELLIGENCE_MALBASE.png" alt="Sentrum Intelligence Målbase">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-showcase">
+                    <div class="product-info">
+                        <div class="product-number">02</div>
+                        <h3>STRATOPS / COSMO³</h3>
+                        <p class="product-desc">Strategisk kommando-senter: AI-orkestrert lederproduktivitet mot informasjonsflom.</p>
+                        <ul class="feature-list">
+                            <li>Synapsen AI: Sanntids-analyse av strategic ROI</li>
+                            <li>Speider AI: Prediktiv markedsinnsikt</li>
+                            <li>Aktivitetslogg: Garantiert operasjonell presisjon</li>
+                            <li>10x gjennomsnittlig SaaS ARPU via enterprise-abonnement</li>
+                        </ul>
+                    </div>
+                    <div class="product-visual">
+                        <div class="device-frame">
+                            <div class="scrollable-content">
+                                <img src="STRATOPS_VERY_LONG_SPEIDER_PAGE.png" alt="StratOps Speider Full Page">
+                            </div>
+                            <div class="scroll-indicator">↓ Scroll for mer</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-showcase">
+                    <div class="product-info">
+                        <div class="product-number">03</div>
+                        <h3>CGA</h3>
+                        <p class="product-desc">Intern AI-accelerator: Multi-agent koding med innebygd sikkerhetsbarriere.</p>
+                        <ul class="feature-list">
+                            <li>FSM-analyse for instruksjonsdekomponering</li>
+                            <li>Koding i isolert Docker sandbox</li>
+                            <li>Kontinuerlig hard kill for å forhindre feil/lekkasjer</li>
+                            <li>80% reduksjon i utviklingskostnader</li>
+                        </ul>
+                    </div>
+                    <div class="product-visual">
+                        <div class="device-frame">
+                            <div class="scrollable-content">
+                                <img src="CGA_CODE_GENERATING_AGENT_SCREENSHOT_AI_THINKLAB.png" alt="CGA Code Generating Agent">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="traction" class="traction">
+        <div class="container">
+            <h2>BEVIST INNTEKTSMOMENTUM</h2>
+            <p class="section-subtitle">Nåværende run-rate | Projisert ARR-eksplosjon ved kapitalinnsprøyting</p>
+
+            <div class="stats-grid">
+                <div class="stat">
+                    <span class="stat-number">1.27M</span>
+                    <span class="stat-label">Totalt generert inntekt siste 18 mnd (NOK)</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">18</span>
+                    <span class="stat-label">Enterprise/B2B-kunder i produksjon</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">500</span>
+                    <span class="stat-label">Mål: Sentrum Intelligence-brukere innen 18 mnd</span>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 4rem;">
+                <a href="#investment" class="btn btn-primary" style="font-size: 1.2rem;">Dette er ikke fremtiden. Dette er i dag. Blir du med på å skalere det?</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="founders" class="founders">
+        <div class="container">
+            <h2>SYSTEMARKITEKTENE</h2>
+            <p class="section-subtitle">Vision + Teknisk integritet = 43 MNOK verdsettelse</p>
+
+            <div class="founders-grid">
+                <div class="founder-card">
+                    <img src="LARS_O_HORPESTAD_AI_THINKLAB.webp" alt="Lars O. Horpestad" class="founder-image">
+                    <div class="founder-content">
+                        <h3 class="founder-name">Lars O. Horpestad</h3>
+                        <p class="founder-title">Gründer & Systemarkitekt</p>
+                        <p class="founder-bio">
+                            Jeg har allerede løst det umulige en gang – da datterens liv hang i en tråd. 
+                            Bygget systemmetoden i helvete og beviste at kaos kan kontrolleres.
+                        </p>
+                        <ul class="founder-credentials">
+                            <li>Forfatter: Norges første praktiske bok om LLMs</li>
+                            <li>Thought Leadership: 18 måneders forsprang</li>
+                            <li>Innovasjon Norge-grant: Statlig validering</li>
+                            <li>1.27 MNOK generert siste 18 måneder</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="founder-card">
+                    <img src="SHAHRAM_ARIAFAR_AI_THINKLAB.webp" alt="Shahram Ariafar" class="founder-image" style="border-bottom-color: var(--blue);">
+                    <div class="founder-content">
+                        <h3 class="founder-name">Shahram Ariafar</h3>
+                        <p class="founder-title" style="color: var(--blue);">Kybernetiker, Romteknolog, Forsvarsingeniør</p>
+                        <p class="founder-bio">
+                            Jeg bygger systemer som ikke kan brytes. ESA, Forsvaret, MIT, Kybernetikk – 
+                            den eneste personen i Norge med denne kombinasjonen av kompetanse.
+                        </p>
+                        <ul class="founder-credentials">
+                            <li>Sivilingeniør: Teknisk Kybernetikk (NTNU)</li>
+                            <li>MSc: Romteknologi (ESA)</li>
+                            <li>Executive Program: Strategi og Innovasjon (MIT)</li>
+                            <li>Krigsskolen: Forsvaret, Systemintegritet</li>
+                            <li>CGA: Hardened Systems Design</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="investment" class="investment">
+        <div class="container">
+            <h2>INVESTERINGSMULIGHETEN</h2>
+            <p class="section-subtitle">10 MNOK for industrialisering</p>
+
+            <div class="valuation-box">
+                <p class="valuation-label">Pre-Money Verdsettelse</p>
+                <p class="valuation-amount">43.000.000 NOK</p>
+            </div>
+
+            <div class="use-of-funds">
+                <h3>Bruk av Midler (10 MNOK Mål)</h3>
+                <div class="fund-item">
+                    <span class="fund-percentage">45%</span>
+                    <strong>Produkt Industrialisering</strong><br>
+                    Full utrulling av Sentrum Intelligence SaaS-plattform
+                </div>
+                <div class="fund-item">
+                    <span class="fund-percentage">35%</span>
+                    <strong>Markedsføring
